@@ -1,0 +1,1 @@
+# ssw695_smart_campus
