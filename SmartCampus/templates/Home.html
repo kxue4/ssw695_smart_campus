@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/basic.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <title>Home Page</title>
+</head>
+<body>
+<div id="container">
+    <header>
+        <div class="logo"><h3>Smart Campus</h3></div>
+        <div class="nav">
+            <ul>
+                <li><a href="#">Home Page</a></li>
+                <li><a href="#">Select a location</a></li>
+                <li><a href="#">Campus Reports</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="content">
+        <div class="menu">
+            <div class="metric_buttons">
+                <div class="row1">
+                    <div align="left" style="float: left"><button type="button" class="btn btn btn-block btn-primary">Temperature</button></div>
+                    <div align="right"><button type="button" class="btn btn-block ">Humidity</button></div>
+                </div>
+                <div class="row2">
+                    <div align="left" style="float:left"><button type="button" class="btn btn-block ">Pressure</button></div>
+                    <div align="right"><button type="button" class="btn btn-block ">Air Quality</button></div>
+                </div>
+            </div>
+            <div class="show_metrics">
+            <table class="metrics_table" border=2>
+                <tr>
+                    <th>Location</th>
+                    <th>Temperature</th>
+                </tr>
+                <tr>
+                    <th>Location1</th>
+                    <th>77</th>
+                </tr>
+                <tr>
+                    <th>Location2</th>
+                    <th>67</th>
+                </tr>
+                <tr>
+                    <th>Location3</th>
+                    <th>83</th>
+                </tr>
+            </table>
+            </div>
+        </div>
+        <div class="map">
+            <img src="images/temp_map_u25.png" class="img-rounded">
+        </div>
+    </div>
+</div>
+</body>
+</html>
