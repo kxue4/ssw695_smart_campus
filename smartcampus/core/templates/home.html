@@ -9,7 +9,7 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Home Page</title>
 </head>
-
+<br><br><br><br><br><br><br><br><br><br>
 <body>
 
     <header>
@@ -56,19 +56,12 @@
                             <th>Temperature</th>
                         </tr>
                     </thead>
-                    <tr>
-                        <th>Location1</th>
-                        <th>77</th>
-                    </tr>
-                    <tr>
-                        <th>Location2</th>
-                        <th>67</th>
-                    </tr>
-                    <tr>
-                        <th>Location3</th>
-                        <th>83</th>
-                    </tr>
-                </table>
+                     {% for post in posts %}
+                        <tr>
+                            <th> Location {{ post.id }}</th>
+                            <th>{{ post.temperature }}</th>
+                        </tr>
+                    {% endfor %}
             </div>
         </div>
     </div>
