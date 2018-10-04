@@ -1,6 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
+from .models import Data
 
 
-class HomePageView(TemplateView):
-    template_name = "home.html"
+def home(request):
+        posts = Data.objects.all()
+        args = { 'posts': posts }
+        return render(request ,'home.html', args)
+
