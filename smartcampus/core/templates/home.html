@@ -9,7 +9,7 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Home Page</title>
 </head>
-<br><br><br><br><br><br><br><br><br><br>
+
 <body>
 
     <header>
@@ -38,7 +38,7 @@
     <div class="container">
         <div id="metric_btn" class="row">
             <div class="btn-group btn-group-lg">
-                <button type="button" class="btn btn-default-activated">Temperature</button>
+                <button type="button" class="btn btn-default">Temperature</button>
                 <button type="button" class="btn btn-default">Humidity</button>
                 <button type="button" class="btn btn-default">Pressure</button>
                 <button type="button" class="btn btn-default">Air Quality</button>
@@ -62,9 +62,9 @@
                             <th>{{ post.temperature }}</th>
                         </tr>
                     {% endfor %}
+                </table>
             </div>
         </div>
     </div>
-
 </body>
 </html>
