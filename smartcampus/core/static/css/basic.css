@@ -2,11 +2,21 @@ header{
     margin-bottom: 5em;
 }
 
-#metric_btn{
+#select_btns{
     margin-bottom: 1em;
     text-align: center;
 }
 
 #heatmap{
     text-align: center;
+}
+
+#chart{
+    margin-bottom: 1em;
+    max-width: 100%;
+    width: 100%
+}
+
+#reports{
+    margin-bottom: 1em;
 }

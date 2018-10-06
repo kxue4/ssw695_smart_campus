@@ -18,6 +18,10 @@ from django.urls import path
 from core import views
 
 urlpatterns = [
-    path('', views.home, name='home')
+    path('', views.home, name='home'),
+    path('home/', views.home, name='home'),
+    path('select_location/', views.select_location, name='select location'),
+    path('campus_report/', views.campus_report, name='campus report'),
+    path('feedback/', views.feedback, name='feedback')
 
 ]
