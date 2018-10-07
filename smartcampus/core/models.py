@@ -117,7 +117,7 @@ class Location(models.Model):
 
 
 class Pressure(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.IntegerField(primary_key=True, null=False)
     pressure_level = models.DecimalField(max_digits=10, decimal_places=2)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     datetime = models.DateTimeField()
@@ -179,21 +179,6 @@ class User(models.Model):
         db_table = 'core_user'
 
 
-class Data(models.Model):
-    mac = models.CharField(max_length=17, blank=True, null=True)
-    temp = models.FloatField(blank=True, null=True)
-    pres = models.FloatField(blank=True, null=True)
-    hum = models.FloatField(blank=True, null=True)
-    gas = models.FloatField(blank=True, null=True)
-    lux = models.IntegerField(blank=True, null=True)
-    db = models.FloatField(blank=True, null=True)
-    dt = models.DateTimeField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'data'
-
-
 class DjangoAdminLog(models.Model):
     action_time = models.DateTimeField()
     object_id = models.TextField(blank=True, null=True)
@@ -234,7 +219,8 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
-class Zerodata(models.Model):
+class Data(models.Model):
+    # id = models.IntegerField(primary_key=True)
     mac = models.CharField(max_length=17, blank=True, null=True)
     temp = models.FloatField(blank=True, null=True)
     pres = models.FloatField(blank=True, null=True)
@@ -245,5 +231,21 @@ class Zerodata(models.Model):
     dt = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        # managed = False
+        db_table = 'data'
+
+
+class Zerodata(models.Model):
+    # id = models.IntegerField(primary_key=True)
+    mac = models.CharField(max_length=17, blank=True, null=True)
+    temp = models.FloatField(blank=True, null=True)
+    pres = models.FloatField(blank=True, null=True)
+    hum = models.FloatField(blank=True, null=True)
+    gas = models.FloatField(blank=True, null=True)
+    lux = models.IntegerField(blank=True, null=True)
+    db = models.FloatField(blank=True, null=True)
+    dt = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        # managed = False
         db_table = 'zeroData'
