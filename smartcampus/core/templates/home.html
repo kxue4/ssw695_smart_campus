@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaGs4FqVJCZcRhKUEBttN1eoPFcprg7Nk"></script>
+    <script href="{% static 'scripts/heatmap.js' %}"></script>
+    <script href="{% static 'scripts/gmaps-heatmap.js' %}"></script>
     <title>Home Page</title>
 </head>
 
@@ -48,7 +51,7 @@
         </div>
         <div class="row">
             <div id="heatmap" class="col-md-8 col-md-push-4">
-                <img src="{% static '/images/temp_map_u25.png' %}">
+                <div id="map-canvas"></div>
             </div>
             <div id="data_table" class="col-md-4 col-md-pull-8">
                 <table class="table table-striped table-bordered">
@@ -68,5 +71,6 @@
             </div>
         </div>
     </div>
+    <script href="{% static 'scripts/temperature_map.js' %}"></script>
 </body>
 </html>
