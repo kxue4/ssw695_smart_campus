@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from .models import Data
+from .models import *
 
 
 def home(request):
-    posts = Data.objects.all()
-    args = {'posts': posts}
-    return render(request, 'home.html', args)
+    # data = Data.objects.filter(dt__lte='2018-01-01')
+    # print(data)
+    return render(request, 'home.html')
 
 
 def select_location(request):
