@@ -40,34 +40,41 @@
         </nav>
     </header>
 
+    <p>{{ args }}</p>
+
     <div class="container">
-        <div id="select_btns" class="row">
-            <div class="btn-group btn-group-lg">
-                <button type="button" class="btn btn-default">Temperature</button>
-                <button type="button" class="btn btn-default">Humidity</button>
-                <button type="button" class="btn btn-default">Pressure</button>
-                <button type="button" class="btn btn-default">Air Quality</button>
-            </div>
-        </div>
         <div class="row">
             <div id="heatmap" class="col-md-8 col-md-push-4">
+                <div id="select_btns" class="row">
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-default">Temperature</button>
+                        <button type="button" class="btn btn-default">Humidity</button>
+                        <button type="button" class="btn btn-default">Pressure</button>
+                        <button type="button" class="btn btn-default">Air Quality</button>
+                    </div>
+                </div>
                 <div id="map-canvas" style="height: 40em"></div>
             </div>
             <div id="data_table" class="col-md-4 col-md-pull-8">
                 <table class="table table-striped table-bordered">
-                    <thead>
+                        <caption>Altorfer</caption>
                         <tr>
-                            <th>Location</th>
                             <th>Temperature</th>
+                            <th>77</th>
                         </tr>
-                    </thead>
-{#                     {% for a in data %}#}
-{#                        <tr>#}
-{#                            <th> Location {{ a }}</th>#}
-{#                            <th>{{ a.temp }}</th>#}
-{#                        </tr>#}
-{#                    {% endfor %}#}
-                </table>
+                        <tr>
+                            <th>Humidity</th>
+                            <th>10%</th>
+                        </tr>
+                        <tr>
+                            <th>Pressure</th>
+                            <th>30.3</th>
+                        </tr>
+                        <tr>
+                            <th>Air quality</th>
+                            <th>180</th>
+                        </tr>
+                    </table>
             </div>
         </div>
     </div>
