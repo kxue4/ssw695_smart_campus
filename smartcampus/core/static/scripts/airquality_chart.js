@@ -3,7 +3,8 @@ var myChart = echarts.init(dom);
 option = null;
 option = {
     title: {
-        text: 'Air Quality in a week'
+        text: 'Air Quality in a week',
+        subtext: 'in a million'
     },
     tooltip: {
         trigger: 'axis'
@@ -15,14 +16,14 @@ option = {
     },
     yAxis: {
         type: 'value',
-        min: 70,  // This is the min value of Y-axis
-        max: 80,  // This is the max value of Y-axis
+        min: 12.5,  // This is the min value of Y-axis
+        max: 13.5,  // This is the max value of Y-axis
     },
     series: [
         {
-            name:'Air Quality',
+            name:'in a million',
             type:'line',
-            data:[],  // This is the value of X-axis
+            data:[12.91, 12.91, 12.91, 12.91, 12.91, 12.91, 12.91],  // This is the value of X-axis
             markPoint: {
                 data: [
                     {type: 'max', name: 'Max'},
