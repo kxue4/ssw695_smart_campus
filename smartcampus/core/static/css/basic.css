@@ -20,3 +20,8 @@ header{
 #reports{
     margin-bottom: 1em;
 }
+
+.map-canvas{
+    display: none;
+    height:40em;
+}
