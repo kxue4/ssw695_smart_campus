@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'css/basic.css' %}">
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaGs4FqVJCZcRhKUEBttN1eoPFcprg7Nk"></script>
     <script type="text/javascript" src="{% static 'scripts/heatmap.js' %}"></script>
     <script type="text/javascript" src="{% static 'scripts/gmaps-heatmap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scripts/switchmap.js' %}"></script>
     <title>Home Page</title>
 </head>
 
@@ -47,13 +48,18 @@
             <div id="heatmap" class="col-md-8 col-md-push-4">
                 <div id="select_btns" class="row">
                     <div class="btn-group btn-group-sm">
-                        <button type="button" class="btn btn-default">Temperature</button>
+                        <button type="button" class="btn btn-primary">Temperature</button>
                         <button type="button" class="btn btn-default">Humidity</button>
                         <button type="button" class="btn btn-default">Pressure</button>
                         <button type="button" class="btn btn-default">Air Quality</button>
                     </div>
                 </div>
-                <div id="map-canvas" style="height: 40em"></div>
+                <div class="map-canvases">
+                    <div id="temperature_map" class="map-canvas" style="display:block"></div>
+                    <div id="humidity_map" class="map-canvas"></div>
+                    <div id="pressure_map" class="map-canvas"></div>
+                    <div id="air_quality_map" class="map-canvas"></div>
+                </div>
             </div>
             <div id="data_table" class="col-md-4 col-md-pull-8">
                 <table class="table table-striped table-bordered">
@@ -78,6 +84,9 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{% static 'scripts/temperature_map.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scripts/temperaturemap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scripts/humiditymap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scripts/pressuremap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scripts/airqualitymap.js' %}"></script>
 </body>
 </html>

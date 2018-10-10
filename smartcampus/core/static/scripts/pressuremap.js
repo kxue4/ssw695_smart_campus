@@ -6,7 +6,7 @@ var myOptions = {
     center: myLatlng
 };
 // standard map
-map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+map = new google.maps.Map(document.getElementById("pressure_map"), myOptions);
 // heatmap layer
 heatmap = new HeatmapOverlay(map, 
     {
@@ -30,7 +30,7 @@ heatmap = new HeatmapOverlay(map,
 
 var testData = {
     max: 3,
-    data: [{lat: 40.742770, lng:-74.026230, count: 3},{lat: 40.745459, lng:-74.022585, count: 5}, {lat: 40.743427, lng:-74.0272672, count: 4}]
+    data: [{lat: 40.742770, lng:-74.026230, count: 3},{lat: 40.745459, lng:-74.022585, count: 5}, {lat: 40.743427, lng:-74.0272672, count: 14}]
 };
 
 heatmap.setData(testData);
