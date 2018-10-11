@@ -67,25 +67,25 @@
                         <tr>
                             {% for post in posts %}
                             <th>Temperature</th>
-                            <th>{{ post.temp }}</th>
+                            <th id="temp_value">{{ post.temp }}</th>
                             {% endfor %}
                         </tr>
                         <tr>
                             {% for post in posts %}
                             <th>Humidity</th>
-                            <th>{{ post.hum }}</th>
+                            <th id="hum_value">{{ post.hum }}</th>
                             {% endfor %}
                         </tr>
                         <tr>
                             {% for post in posts %}
                             <th>Pressure</th>
-                            <th>{{ post.pres }}</th>
+                            <th id="pres_value">{{ post.pres }}</th>
                             {% endfor %}
                         </tr>
                         <tr>
                             {% for post in posts %}
                             <th>Air quality</th>
-                            <th>{{ post.gas }}</th>
+                            <th id="gas_value">{{ post.gas }}</th>
                             {% endfor %}
                         </tr>
                     </table>
