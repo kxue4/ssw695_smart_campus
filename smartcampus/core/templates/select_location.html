@@ -53,25 +53,25 @@
                         <tr>
                             {% for post in posts %}
                             <th>Temperature</th>
-                            <th>{{ post.temp }}</th>
+                            <th id="temp_value">{{ post.temp }}</th>
                             {% endfor %}
                         </tr>
                         <tr>
                             {% for post in posts %}
                             <th>Humidity</th>
-                            <th>{{ post.hum }}</th>
+                            <th id="humi_value">{{ post.hum }}</th>
                             {% endfor %}
                         </tr>
                         <tr>
                             {% for post in posts %}
                             <th>Pressure</th>
-                            <th>{{ post.pres }}</th>
+                            <th id="pres_value">{{ post.pres }}</th>
                             {% endfor %}
                         </tr>
                         <tr>
                             {% for post in posts %}
                             <th>Air quality</th>
-                            <th>{{ post.gas }}</th>
+                            <th id="gas_calue">{{ post.gas }}</th>
                             {% endfor %}
                         </tr>
                     </table>
@@ -81,15 +81,179 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div id="temp_chart" style="height: 300px;width: 100%"></div>
-                        <script type="text/javascript" src="{% static 'scripts/temperature_chart.js' %}"></script>
-                        <div id="humi_chart" style="height: 300px;width: 100%"></div>
-                        <script type="text/javascript" src="{% static 'scripts/humidity_chart.js' %}"></script>
+                        <script type="text/javascript">
+                            var dom = document.getElementById("temp_chart");
+                            var myChart = echarts.init(dom);
+                            myChart.setOption({
+                                title: {
+                                    text: 'Temperature in an hour',
+                                    subtext: 'in °F'
+                                },
+                                tooltip: {
+                                    trigger: 'axis'
+                                },
+                                xAxis:  {
+                                    type: 'category',
+                                    boundaryGap: false,
+                                    data: ['4:00','4:10','4:20','4:30','4:40','4:50']  // This is the tag of X-axis
+                                },
+                                yAxis: {
+                                    type: 'value',
+                                    min: 55.65,  // This is the min value of Y-axis
+                                    max: 55.75,  // This is the max value of Y-axis
+                                },
+                                series: [
+                                    {
+                                        name:'°F',
+                                        type:'line',
+                                        data: {{ temps|safe }},  // This is the value of X-axis
+                                        markPoint: {
+                                            data: [
+                                                {type: 'max', name: 'Max'},
+                                                {type: 'min', name: 'Min'}
+                                            ]
+                                        },
+                                        markLine: {
+                                            data: [
+                                                {type: 'average', name: 'average'}
+                                            ]
+                                        }
+                                    },
+                                ]
+                            });
+                            window.onresize = myChart.resize;
+                        </script>
+                        <div id="hum_chart" style="height: 300px;width: 100%"></div>
+                        <script type="text/javascript">
+                            var dom = document.getElementById("hum_chart");
+                            var myChart = echarts.init(dom);
+                            myChart.setOption({
+                                title: {
+                                    text: 'Humidity in an hour',
+                                    subtext: 'in %'
+                                },
+                                tooltip: {
+                                    trigger: 'axis'
+                                },
+                                xAxis:  {
+                                    type: 'category',
+                                    boundaryGap: false,
+                                    data: ['4:00','4:10','4:20','4:30','4:40','4:50']  // This is the tag of X-axis
+                                },
+                                yAxis: {
+                                    type: 'value',
+                                    min: 72,  // This is the min value of Y-axis
+                                    max: 73,  // This is the max value of Y-axis
+                                },
+                                series: [
+                                    {
+                                        name:'%',
+                                        type:'line',
+                                        data: {{ hums|safe }},  // This is the value of X-axis
+                                        markPoint: {
+                                            data: [
+                                                {type: 'max', name: 'Max'},
+                                                {type: 'min', name: 'Min'}
+                                            ]
+                                        },
+                                        markLine: {
+                                            data: [
+                                                {type: 'average', name: 'average'}
+                                            ]
+                                        }
+                                    },
+                                ]
+                            });
+                            window.onresize = myChart.resize;
+                        </script>
                     </div>
                     <div class="col-md-6">
                         <div id="pres_chart" style="height: 300px;width: 100%"></div>
-                        <script type="text/javascript" src="{% static 'scripts/pressure_chart.js' %}"></script>
-                        <div id="air_chart" style="height: 300px;width: 100%"></div>
-                        <script type="text/javascript" src="{% static 'scripts/airquality_chart.js' %}"></script>
+                        <script type="text/javascript">
+                            var dom = document.getElementById("pres_chart");
+                            var myChart = echarts.init(dom);
+                            myChart.setOption({
+                                title: {
+                                    text: 'Pressure in an hour',
+                                    subtext: 'in hPA'
+                                },
+                                tooltip: {
+                                    trigger: 'axis'
+                                },
+                                xAxis:  {
+                                    type: 'category',
+                                    boundaryGap: false,
+                                    data: ['4:00','4:10','4:20','4:30','4:40','4:50']  // This is the tag of X-axis
+                                },
+                                yAxis: {
+                                    type: 'value',
+                                    min: 1010,  // This is the min value of Y-axis
+                                    max: 1011,  // This is the max value of Y-axis
+                                },
+                                series: [
+                                    {
+                                        name:'hPA',
+                                        type:'line',
+                                        data: {{ press|safe }},  // This is the value of X-axis
+                                        markPoint: {
+                                            data: [
+                                                {type: 'max', name: 'Max'},
+                                                {type: 'min', name: 'Min'}
+                                            ]
+                                        },
+                                        markLine: {
+                                            data: [
+                                                {type: 'average', name: 'average'}
+                                            ]
+                                        }
+                                    },
+                                ]
+                            });
+                            window.onresize = myChart.resize;
+                        </script>
+                        <div id="gas_chart" style="height: 300px;width: 100%"></div>
+                        <script type="text/javascript">
+                            var dom = document.getElementById("gas_chart");
+                            var myChart = echarts.init(dom);
+                            myChart.setOption({
+                                title: {
+                                    text: 'Air Quality in an hour',
+                                    subtext: 'in million'
+                                },
+                                tooltip: {
+                                    trigger: 'axis'
+                                },
+                                xAxis:  {
+                                    type: 'category',
+                                    boundaryGap: false,
+                                    data: ['4:00','4:10','4:20','4:30','4:40','4:50']  // This is the tag of X-axis
+                                },
+                                yAxis: {
+                                    type: 'value',
+                                    min: 12.9,  // This is the min value of Y-axis
+                                    max: 13,  // This is the max value of Y-axis
+                                },
+                                series: [
+                                    {
+                                        name:'%',
+                                        type:'line',
+                                        data: {{ gass|safe }},  // This is the value of X-axis
+                                        markPoint: {
+                                            data: [
+                                                {type: 'max', name: 'Max'},
+                                                {type: 'min', name: 'Min'}
+                                            ]
+                                        },
+                                        markLine: {
+                                            data: [
+                                                {type: 'average', name: 'average'}
+                                            ]
+                                        }
+                                    },
+                                ]
+                            });
+                            window.onresize = myChart.resize;
+                        </script>
                     </div>
                 </div>
 
