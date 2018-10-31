@@ -38,25 +38,32 @@
 
     <div class="container">
         <h1 style="text-align: center">Feedback</h1>
-            <form role="form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control" placeholder="Please enter your name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" placeholder="Please enter your email">
-                </div>
-                <div class="form-group">
-                    <label for="inputfile">Feedback</label>
-                    <textarea class="form-control" rows="5" placeholder="Please enter your feedback"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="inputfile">File</label>
-                    <input type="file" id="inputfile">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+{#            <form role="form" action="/feedback-submit" method="post">#}
+{#                <div class="form-group">#}
+{#                    <label for="name">Name</label>#}
+{#                    <input type="text" class="form-control" placeholder="Please enter your name" name="name">#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                    <label for="email">Email</label>#}
+{#                    <input type="text" class="form-control" placeholder="Please enter your email" name="email">#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                    <label for="inputfile">Feedback</label>#}
+{#                    <textarea class="form-control" rows="5" placeholder="Please enter your feedback" name="feedback"></textarea>#}
+{#                </div>#}
+{#                <div class="form-group">#}
+{#                    <label for="inputfile">File</label>#}
+{#                    <input type="file" id="inputfile">#}
+{#                </div>#}
+{#                <button type="submit" class="btn btn-default">Submit</button>#}
+{#            </form>#}
+            {% block content %}
+                <form action="/feedback/" method="post">
+                    {% csrf_token %}
+                    {{ form.as_table }}
+                    <input type="submit" value="Submit">
+                </form>
+            {% endblock %}
     </div>
 
 </body>

@@ -2,13 +2,20 @@ from django.shortcuts import render
 from django.forms.models import model_to_dict
 from django.core.serializers.json import DjangoJSONEncoder
 import json
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .forms import FeedbackForm
+import sendgrid
+import os
+from sendgrid.helpers.mail import *
 from .models import *
 
 
 def home(request):
     posts = [Data.objects.latest('id')]
     cont = {'posts': posts}
-    return render(request, 'home.html',cont)
+    return render(request, 'home.html', cont)
 
 
 def select_location(request):
@@ -43,6 +50,7 @@ def select_location(request):
 
 
 def campus_report(request):
+    """ GET request for the campus reports page. """
     return render(request, 'campus_report.html')
 
 
@@ -101,4 +109,38 @@ def report_2018_07_28(request):
 
 
 def feedback(request):
-    return render(request, 'feedback.html')
+    """ GET and POST requests for the feedback.html page. """
+
+    if request.method == 'POST':
+        feedback_instance = get_object_or_404(Feedback)
+        feedback_form = FeedbackForm(request.POST)
+
+        if feedback_form.is_valid():
+            feedback_instance.name = feedback_form.cleaned_data['name']
+            feedback_instance.email = feedback_form.cleaned_data['email']
+            feedback_instance.feedback = feedback_form.cleaned_data['feedback']
+            feedback_instance.save()
+
+            # === Sendgrid email ===
+            # sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+            # from_email = Email(feedback_form.cleaned_data['email'])
+            # to_email = Email("vporta7@gmail.com")
+            # subject = "Feedback"
+            # content = Content("text/plain", "Name: {} \nFeedback: {}".format(feedback_form.cleaned_data['name'], feedback_form.cleaned_data['feedback']))
+            # mail = Mail(from_email, subject, to_email, content)
+            # response = sg.client.mail.send.post(request_body=mail.get())
+            # print(response.status_code)
+            # print(response.body)
+            # print(response.headers)
+            return HttpResponseRedirect(reverse('/'))
+
+    feedback_form = FeedbackForm()
+
+    context = {
+        'form': feedback_form,
+    }
+    return render(request, 'feedback.html', context)
+
+
+
+
