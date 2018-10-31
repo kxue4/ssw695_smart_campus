@@ -249,3 +249,9 @@ class Zerodata(models.Model):
     class Meta:
         # managed = False
         db_table = 'zeroData'
+
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=220, null=True)
+    email = models.DateTimeField(null=True)
+    feedback = models.CharField(max_length=220, null=True)

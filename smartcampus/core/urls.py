@@ -22,6 +22,8 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('select_location/', views.select_location, name='select location'),
     path('campus_report/', views.campus_report, name='campus report'),
-    path('feedback/', views.feedback, name='feedback')
+    path('feedback/', views.feedback, name='feedback'),
+    # path('post-feedback/', views.post_feedback, name='post-feedback'),
+
 
 ]
