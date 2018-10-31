@@ -23,5 +23,22 @@ header{
 
 .map-canvas{
     display: none;
-    height:40em;
+}
+
+.heatmapContainer {
+    width:100%; height:100%;}
+
+.min{
+    float:left;
+}
+
+.max{
+    float:right;
+}
+
+.heatmapLegend {
+    width:15em; background:white; position:absolute; bottom:0; right:0; padding:10px; }
+
+.canvas{
+    width:100%;
 }
