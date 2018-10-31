@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/basic.css' %}">
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaGs4FqVJCZcRhKUEBttN1eoPFcprg7Nk"></script>
     <script type="text/javascript" src="{% static 'scripts/heatmap.js' %}"></script>
@@ -54,11 +55,44 @@
                         <button type="button" class="btn btn-default">Air Quality</button>
                     </div>
                 </div>
+
                 <div class="map-canvases">
-                    <div id="temperature_map" class="map-canvas" style="display:block"></div>
-                    <div id="humidity_map" class="map-canvas"></div>
-                    <div id="pressure_map" class="map-canvas"></div>
-                    <div id="air_quality_map" class="map-canvas"></div>
+                    <div class="map-canvas" style="display:block; height: 40em;">
+                    <div id="temperature_map" style="height: 100%"></div>
+                    <div class="heatmapLegend">
+                        <h3 class="legend_title">Temperature</h3>
+                        <span class="min"></span>
+                        <span class="max"></span>
+                        <canvas class="canvas" style="width: 100%"></canvas>
+                    </div>
+                    </div>
+                    <div class="map-canvas">
+                    <div id="humidity_map" style="height: 40em"></div>
+                    <div class="heatmapLegend">
+                        <h3 class="legend_title">Humidity</h3>
+                        <span class="min"></span>
+                        <span class="max"></span>
+                        <canvas class="canvas" style="width: 100%"></canvas>
+                    </div>
+                    </div>
+                    <div class="map-canvas">
+                    <div id="pressure_map" style="height: 40em"></div>
+                    <div class="heatmapLegend">
+                        <h3 class="legend_title">Pressure</h3>
+                        <span class="min"></span>
+                        <span class="max"></span>
+                        <canvas class="canvas" style="width: 100%"></canvas>
+                    </div>
+                    </div>
+                    <div class="map-canvas">
+                    <div id="air_quality_map" style="height: 40em"></div>
+                    <div class="heatmapLegend">
+                        <h3 class="legend_title">Air Quality</h3>
+                        <span class="min"></span>
+                        <span class="max"></span>
+                        <canvas class="canvas" style="width: 100%"></canvas>
+                    </div>
+                    </div>
                 </div>
             </div>
             <div id="data_table" class="col-md-4 col-md-pull-8">
@@ -92,9 +126,74 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="{% static 'scripts/temperaturemap.js' %}"></script>
-    <script type="text/javascript" src="{% static 'scripts/humiditymap.js' %}"></script>
-    <script type="text/javascript" src="{% static 'scripts/pressuremap.js' %}"></script>
-    <script type="text/javascript" src="{% static 'scripts/airqualitymap.js' %}"></script>
+    <script>
+        {% for post in posts %}
+            var heatmaps = [
+                {metric: "Temperature",id: "temperature_map", value: {{post.temp}}, max: 65, min: 0, unit: "°C"},
+                {metric: "Humidity", id: "humidity_map", value: {{post.hum}}, max: 80, min: 20, unit: "% r.H"},
+                {metric: "Pressure", id: "pressure_map", value: {{post.pres}}, max: 1100, min: 300, unit: "hPa"},
+                {metric: "Air Quality", id: "air_quality_map", value: {{post.gas}}, max: 50000, min: 0, unit: ""}
+            ];
+        {% endfor %}
+        // map center
+        var myLatlng = new google.maps.LatLng(40.742770, -74.026230);
+        // map options,
+        var myOptions = {
+            zoom: 16,
+            center: myLatlng
+        };
+
+        function updateLegend(testData, i) {
+            var legendCanvas = document.getElementsByClassName('canvas')[i];
+            legendCanvas.width = 100;
+            legendCanvas.height = 10;
+            var legendCtx = legendCanvas.getContext('2d');
+            var gradientCfg = { 0.25: "rgb(0,0,255)", 0.55: "rgb(0,255,0)", 0.85: "yellow", 1.0: "rgb(255,0,0)"};
+            $('.min').eq(i).html(testData.min + heatmaps[i].unit);
+            $('.max').eq(i).html(testData.max+ heatmaps[i].unit);
+            var gradient = legendCtx.createLinearGradient(0, 0, 100, 1);
+            for (var key in gradientCfg) {
+                gradient.addColorStop(key, gradientCfg[key]);
+            }
+
+            legendCtx.fillStyle = gradient;
+            legendCtx.fillRect(0, 0, 100, 10);
+        };
+
+        for (var i = 0; i < heatmaps.length; i++) {
+            map = new google.maps.Map(document.getElementById(heatmaps[i].id), myOptions);
+            // heatmap layer
+            heatmap = new HeatmapOverlay(map,
+                {
+                    // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+                    "radius": 30,
+                    "maxOpacity": 0.8,
+                    // scales the radius based on map zoom
+                    "scaleRadius": false,
+                    // if set to false the heatmap uses the global maximum for colorization
+                    // if activated: uses the data maximum within the current map boundaries
+                    //   (there will always be a red spot with useLocalExtremas true)
+                    "useLocalExtrema": false,
+                    // which field name in your data represents the latitude - default "lat"
+                    latField: 'lat',
+                    // which field name in your data represents the longitude - default "lng"
+                    lngField: 'lng',
+                    // which field name in your data represents the data value - default "value"
+                    valueField: 'value'
+                }
+            );
+
+            var testData = {
+                max: heatmaps[i].max,
+                min: heatmaps[i].min,
+                data: [{lat: 40.743427, lng: -74.0272672, value: heatmaps[i].value}],
+
+            };
+            //{lat: 40.742770, lng:-74.026230, count: 3},{lat: 40.745459, lng:-74.022585, count: 5}
+            heatmap.setData(testData);
+            updateLegend(testData, i);
+        }
+        ;
+    </script>
 </body>
 </html>
