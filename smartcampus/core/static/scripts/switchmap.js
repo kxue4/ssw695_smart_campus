@@ -10,7 +10,7 @@ window.onload = function(){
                 myButton[i].className="btn btn-default";
                 myDiv[i].style.display="none";
             }
-            this.className = "btn btn-primary";
+            this.className = "btn btn-danger";
             myDiv[this.index].style.display = "block";
         }
       }
