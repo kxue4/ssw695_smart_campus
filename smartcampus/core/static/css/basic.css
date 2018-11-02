@@ -34,16 +34,23 @@ header{
 }
 
 .heatmapLegend {
-    width:15em; background:white; position:absolute; bottom:0; right:0; padding:0.5em; }
+    width:15em; background:white; position:absolute; bottom:0; right:0; padding:0.5em;}
 
 .canvas{
     width:100%;
 }
+
+/*.navbar-default{*/
+    /*background-color: darkred;*/
+    /*color: white;*/
+/*}*/
 .navbar{
     height:60px;
+    background-color: white;
 }
 .navbar a{
     color: rgb(163,38,56);
+    background-color: white;
 }
 
 .navbar ul li a:hover{
@@ -57,4 +64,8 @@ header{
 
 .navbar-left {
     margin-right: 1em;
+}
+.icon-bar{
+    background-color: rgb(163,38,56);
+    color: white;
 }
