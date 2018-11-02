@@ -62,7 +62,6 @@ def report_2018_07_28(request):
     hums = []
     press = []
     gass = []
-    times = []
     year = 2018
     month = 7
     day = 28
