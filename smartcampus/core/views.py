@@ -107,18 +107,33 @@ def report_2018_07_28(request):
                                                       'gass': gass, 'average': average})
 
 
+# def feedback(request):
+#     """ GET request for the feedback.html page. """
+#
+#     feedback_form = FeedbackForm()
+#
+#     context = {
+#         'form': feedback_form,
+#     }
+#     return render(request, 'feedback.html', context)
+
+
 def feedback(request):
-    """ GET and POST requests for the feedback.html page. """
+    """ POST request for the feedback.html page. """
 
     if request.method == 'POST':
-        feedback_instance = get_object_or_404(Feedback)
+        # feedback_instance = get_object_or_404(Feedback)
         feedback_form = FeedbackForm(request.POST)
-
+        print(feedback_form)
         if feedback_form.is_valid():
+            feedback_instance = Feedback()
             feedback_instance.name = feedback_form.cleaned_data['name']
             feedback_instance.email = feedback_form.cleaned_data['email']
             feedback_instance.feedback = feedback_form.cleaned_data['feedback']
             feedback_instance.save()
+            print(feedback_instance.name)
+            print(feedback_instance.email)
+            print(feedback_instance.feedback)
 
             # === Sendgrid email ===
             # sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
@@ -131,14 +146,13 @@ def feedback(request):
             # print(response.status_code)
             # print(response.body)
             # print(response.headers)
-            return HttpResponseRedirect(reverse('/'))
-
-    feedback_form = FeedbackForm()
-
-    context = {
-        'form': feedback_form,
-    }
-    return render(request, 'feedback.html', context)
+            return HttpResponseRedirect('/')
+    else:
+        feedback_form = FeedbackForm()
+        context = {
+            'form': feedback_form,
+        }
+        return render(request, 'feedback.html', context)
 
 
 

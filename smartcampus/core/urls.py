@@ -24,6 +24,6 @@ urlpatterns = [
     path('campus_report/', views.campus_report, name='campus report'),
     path('feedback/', views.feedback, name='feedback'),
     path('campus_report/report_2018_07_28', views.report_2018_07_28, name='report_2018_07_28'),
-    # path('post-feedback/', views.post_feedback, name='post-feedback'),
+    # path('post-feedback/', views.post_feedback, name='feedback'),
     
 ]
