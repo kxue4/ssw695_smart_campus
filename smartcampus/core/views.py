@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.forms.models import model_to_dict
 from django.core.serializers.json import DjangoJSONEncoder
 import json
-from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .forms import FeedbackForm
@@ -136,17 +135,18 @@ def feedback(request):
             print(feedback_instance.feedback)
 
             # === Sendgrid email ===
-            # sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
-            # from_email = Email(feedback_form.cleaned_data['email'])
-            # to_email = Email("vporta7@gmail.com")
-            # subject = "Feedback"
-            # content = Content("text/plain", "Name: {} \nFeedback: {}".format(feedback_form.cleaned_data['name'], feedback_form.cleaned_data['feedback']))
-            # mail = Mail(from_email, subject, to_email, content)
-            # response = sg.client.mail.send.post(request_body=mail.get())
-            # print(response.status_code)
-            # print(response.body)
-            # print(response.headers)
-            return HttpResponseRedirect('/')
+            sg = sendgrid.SendGridAPIClient(apikey=os.environ.get('SENDGRID_API_KEY'))
+            from_email = Email(feedback_form.cleaned_data['email'])
+            to_email = Email("vporta7@gmail.com")
+            subject = "Feedback"
+            content = Content("text/plain", "Name: {} \nFeedback: {}".format(feedback_form.cleaned_data['name'],
+                                                                             feedback_form.cleaned_data['feedback']))
+            mail = Mail(from_email, subject, to_email, content)
+            response = sg.client.mail.send.post(request_body=mail.get())
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
+            return HttpResponseRedirect(reverse('/'))
     else:
         feedback_form = FeedbackForm()
         context = {
