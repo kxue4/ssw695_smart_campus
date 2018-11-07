@@ -3,7 +3,6 @@ from django.forms.models import model_to_dict
 from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.http import HttpResponseRedirect
-from django.urls import reverse
 from .forms import FeedbackForm
 import sendgrid
 import os
@@ -106,22 +105,10 @@ def report_2018_07_28(request):
                                                       'gass': gass, 'average': average})
 
 
-# def feedback(request):
-#     """ GET request for the feedback.html page. """
-#
-#     feedback_form = FeedbackForm()
-#
-#     context = {
-#         'form': feedback_form,
-#     }
-#     return render(request, 'feedback.html', context)
-
-
 def feedback(request):
     """ POST request for the feedback.html page. """
 
     if request.method == 'POST':
-        # feedback_instance = get_object_or_404(Feedback)
         feedback_form = FeedbackForm(request.POST)
         print(feedback_form)
         if feedback_form.is_valid():
@@ -139,7 +126,7 @@ def feedback(request):
             from_email = Email('vporta7@gmail.com')
             to_email = Email("vporta7@yahoo.com")
             subject = "Feedback"
-            content = Content("text/plain", "Name: {} \nFeedback: {}".format(feedback_form.cleaned_data['name'],
+            content = Content("text/plain", "Name: {} \nEmail: {} Feedback: {}".format(feedback_form.cleaned_data['name'],
                                                                              feedback_form.cleaned_data['email'],
                                                                              feedback_form.cleaned_data['feedback']))
             mail = Mail(from_email, subject, to_email, content)
