@@ -253,5 +253,5 @@ class Zerodata(models.Model):
 
 class Feedback(models.Model):
     name = models.CharField(max_length=220, null=True)
-    email = models.DateTimeField(null=True)
+    email = models.EmailField(max_length=70, null=True)
     feedback = models.CharField(max_length=220, null=True)
