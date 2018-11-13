@@ -1,5 +1,6 @@
 from django.test import TestCase
 from .models import *
+from .forms import FeedbackForm
 
 
 # Models
@@ -62,7 +63,6 @@ class ZerodataModelTest(TestCase):
 
 
 # Urls
-
 class ProjectTests(TestCase):
 
     def test_homepage(self):
@@ -81,6 +81,7 @@ class ProjectTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_feedbackpage(self):
-        """ Test the status code for feedbackpage should equal 200"""
+        """ Test the status code for feedback page should equal 200"""
         response = self.client.get('/feedback')
         self.assertEqual(response.status_code, 200)
+

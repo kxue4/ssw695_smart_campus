@@ -2,9 +2,11 @@ from django import forms
 
 
 class FeedbackForm(forms.Form):
-    name = forms.CharField(help_text="Enter a name.")
-    email = forms.EmailField(help_text="Enter a and email.")
-    feedback = forms.CharField(help_text="Provide some feedback.")
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter your name'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                           'placeholder': 'Enter your email address'}))
+    feedback = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control',
+                                                             'placeholder': 'Provide your feedback here'}))
 
     def clean_name(self):
         """ Sanitize the name field """
