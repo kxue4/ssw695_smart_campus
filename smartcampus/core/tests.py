@@ -106,3 +106,4 @@ class ProjectTests(TestCase):
         """
         response = self.client.get('/feedback/')
         self.assertEqual(response.status_code, 200)
+

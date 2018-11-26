@@ -1,6 +1,28 @@
 language: python
+
 python:
- - "3.6"
+  - "3.6"
+
+services:
+  - mysql
+
+#before_install:
+
+install:
+  - pip install -r requirements.txt
+
+#after_install:
+
+#before_script:
 
 script:
- - python -m unittest
+  - python3 manage.py test
+  - coverage run manage.py test core -v 2
+
+after_success:
+  - coverage html
+
+#after_script:
+
+
+
