@@ -11,12 +11,20 @@ from .models import *
 
 
 def home(request):
+    """
+    GET request for the home page.
+    Returns the last metric values from the Data table.
+    """
     posts = [Data.objects.latest('id')]
     cont = {'posts': posts}
     return render(request, 'home.html', cont)
 
 
 def select_location(request):
+    """
+    GET request to the location page
+    Returns metrics in the chart displays.
+    """
     dataset = Data.objects.all()
     posts = [dataset.latest('id')]
 
@@ -48,11 +56,16 @@ def select_location(request):
 
 
 def campus_report(request):
-    """ GET request for the campus reports page. """
+    """
+    GET request for the campus reports page.
+    """
     return render(request, 'campus_report.html')
 
 
 def report_2018_07_28(request):
+    """
+    GET request for the reports page.
+    """
     # daily report only
     # 2018-07-28 00:00 to 2018-07-28 20:59
     dataset = Data.objects.all()
@@ -106,7 +119,10 @@ def report_2018_07_28(request):
 
 
 def feedback(request):
-    """ POST request for the feedback.html page. """
+    """
+    GET request returns the form on the feedback page.
+    POST request sends an email.
+    """
 
     if request.method == 'POST':
         feedback_form = FeedbackForm(request.POST)

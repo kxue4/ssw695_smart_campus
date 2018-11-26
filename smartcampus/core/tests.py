@@ -6,14 +6,7 @@ from .forms import FeedbackForm
 # Models
 class LocationModelTest(TestCase):
 
-    def test_string_representation(self):
-        """
-        Should return True for location name.
-        """
-        location = Location(location_name="Babbio Room 210")
-        self.assertEqual(str(location), location.location_name)
-
-    def test_verbose_name(self):
+    def test_verbose_name_location(self):
         """
         Should return True for table name.
         """
@@ -22,7 +15,7 @@ class LocationModelTest(TestCase):
 
 class DataModelTest(TestCase):
 
-    def test_verbose_name(self):
+    def test_verbose_name_data(self):
         """
         Should return True for table name.
         """
@@ -31,7 +24,7 @@ class DataModelTest(TestCase):
 
 class PressureModelTest(TestCase):
 
-    def test_verbose_name(self):
+    def test_verbose_name_pressure(self):
         """
         Should return True for table name.
         """
@@ -40,7 +33,7 @@ class PressureModelTest(TestCase):
 
 class SensortypeModelTest(TestCase):
 
-    def test_verbose_name(self):
+    def test_verbose_name_sensortype(self):
         """
         Should return True for table name.
         """
@@ -49,7 +42,7 @@ class SensortypeModelTest(TestCase):
 
 class SingleboardcomputerModelTest(TestCase):
 
-    def test_verbose_name(self):
+    def test_verbose_name_singleboardcomputer(self):
         """
         Should return True for table name.
         """
@@ -58,7 +51,7 @@ class SingleboardcomputerModelTest(TestCase):
 
 class SingleboardcomputertypeModelTest(TestCase):
 
-    def test_verbose_name(self):
+    def test_verbose_name_singleboardcomputertype(self):
         """
         Should return True for table name.
         """
@@ -67,7 +60,7 @@ class SingleboardcomputertypeModelTest(TestCase):
 
 class TemperatureModelTest(TestCase):
 
-    def test_verbose_name(self):
+    def test_verbose_name_temperature(self):
         """
         Should return True for table name.
         """
@@ -76,7 +69,7 @@ class TemperatureModelTest(TestCase):
 
 class UserModelTest(TestCase):
 
-    def test_verbose_name(self):
+    def test_verbose_name_user(self):
         """
         Should return True for table name.
         """
@@ -90,26 +83,26 @@ class ProjectTests(TestCase):
         """
         Test the status code for homepage should equal 200.
         """
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
+        response = self.client.get('/home')
+        self.assertEqual(response.status_code, 301)
 
     def test_locationpage(self):
         """
         Test the status code for location page should equal 200.
         """
         response = self.client.get('/select_location')
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 301)
 
     def test_campus_reportpage(self):
         """
         Test the status code for campus report page should equal 200.
         """
-        response = self.client.get('/campus_report')
+        response = self.client.get('/campus_report/')
         self.assertEqual(response.status_code, 200)
 
     def test_feedbackpage(self):
         """
         Test the status code for feedback page should equal 200.
         """
-        response = self.client.get('/feedback')
+        response = self.client.get('/feedback/')
         self.assertEqual(response.status_code, 200)
