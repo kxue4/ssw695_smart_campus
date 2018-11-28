@@ -8,8 +8,8 @@ services:
 
 #before_install:
 
-install:
-  - pip install -r smartcampus/requirements.txt
+#install:
+#  - pip install -r smartcampus/requirements.txt
 
 #after_install:
 
