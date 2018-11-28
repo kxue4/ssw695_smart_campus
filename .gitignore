@@ -6,6 +6,9 @@
 .idea/**/shelf
 .idea
 
+
+activate.sh
+
 # Generated files
 .idea/**/contentModel.xml
 
