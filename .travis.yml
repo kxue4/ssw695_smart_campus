@@ -16,8 +16,8 @@ services:
 #before_script:
 
 script:
-  - python3 manage.py test
-  - coverage run manage.py test core -v 2
+  - python3 smartcampus/manage.py test
+  - coverage run smartcampus/manage.py test core -v 2
 
 after_success:
   - coverage html
